@@ -1,0 +1,14 @@
+[package]
+name = "compload"
+version = "0.1.0"
+authors = ["Christophe Sadoine <chris@indefini.org>"]
+
+[lib]
+name = "compload"
+crate-type = ["dylib"]
+
+[dependencies]
+
+[dependencies.dormin]
+git = "https://github.com/indefini/dormin.git"
+
