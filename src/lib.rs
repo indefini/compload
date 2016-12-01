@@ -1,3 +1,9 @@
+#[macro_use]
+extern crate dormin;
+extern crate rustc_serialize;
+
+mod test;
+
 #[cfg(test)]
 mod tests {
     #[test]
@@ -8,6 +14,6 @@ mod tests {
 #[no_mangle]
 pub fn get_my_i32() -> i32
 {
-    println!("sssso");
-    44i32
+    println!("dsfsfsfdsfs");
+    11113i32
 }
