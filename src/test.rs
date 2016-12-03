@@ -1,6 +1,6 @@
 use std::rc::Rc;
 use std::cell::RefCell;
-use dormin::component::{Component,Components};
+use dormin::component::{Component,Components, CompTrait};
 use dormin::component::manager::Encode;
 use dormin::object::Object;
 use dormin::transform;
@@ -10,6 +10,7 @@ use dormin::resource;
 use dormin::property::{PropertyRead, PropertyGet, PropertyWrite, WriteValue};
 use std::any::Any;
 use dormin::input;
+use dormin::component;
 
 
 #[derive(Clone, RustcEncodable, RustcDecodable,Default)]
@@ -23,7 +24,7 @@ pub struct TestBehavior;
 
 impl Test
 {
-    pub fn new() -> Test
+    pub fn nefw() -> Test
     {
         Test {
             speed : 3f64
@@ -51,4 +52,22 @@ impl Component for TestBehavior
 
 property_set_impl!(Test,[speed]);
 property_get_impl!(Test,[speed]);
+
+
+impl CompTrait for Test
+{
+    const ID  : &'static str = "test";
+    /*
+    fn new() -> Self
+    {
+        Test {
+            speed : 3f64
+        }
+    }
+    */
+
+    fn update(&mut self) {
+        println!("updating test");
+    }
+}
 
