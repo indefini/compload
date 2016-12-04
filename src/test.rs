@@ -56,7 +56,7 @@ property_get_impl!(Test,[speed]);
 
 impl CompTrait for Test
 {
-    const ID  : &'static str = "test";
+//    const ID  : &'static str = "test";
     /*
     fn new() -> Self
     {
@@ -69,5 +69,19 @@ impl CompTrait for Test
     fn update(&mut self) {
         println!("updating test");
     }
+}
+
+
+pub struct Test2
+{
+
+}
+
+impl CompTrait for Test2
+{
+    fn update(&mut self) {
+        println!("updating test");
+    }
+
 }
 

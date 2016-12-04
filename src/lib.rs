@@ -23,6 +23,13 @@ pub fn get_my_i32() -> i32
     11113i32
 }
 
+#[no_mangle]
+pub fn build_mesh()
+{
+    println!("will try to build mesh");
+}
+
+
 pub fn get_comp_list() -> Vec<String>
 {
     vec!["test".to_owned(), "dance".to_owned()]
@@ -35,11 +42,62 @@ pub struct Components
     //... etc
 }
 
-//pub type ObjectComponents2 = HashMap<String, Vec<u32>>;
+struct Obj {
+    id : uu
+}
+
+struct Pool<T>
+{
+    // when you add object,
+    // if data and cells
+    // "data" and "cells" gets bigger.
+    //
+    data : Vec<T>,
+
+    //change size for each index : can get smaller
+    cells : Vec<u32>,
+    free : u32,
+}
+
+impl<T:default> Pool<T>
+{
+    fn new() -> Pool<T>
+    {
+        Pool {
+            data : Vec::new(),
+            cells : Vec::new(),
+            free : 0
+        }
+    }
+
+    fn add_user(&mut self, id : u32 ) {
+
+        if free == 0 {
+            self.data.push(T::default());
+            self.cells.push(id);
+        }
+        else if free > 0 {
+            //reset?
+            //self.data[len-free].reset()
+            self.cells[self.cells.len()-free] = id;
+            self.free = self.free -1;
+        }
+    }
+}
+
+
+// or
+//rules contains object
+struct TheWorldRules
+{
+    rule1_users : Pool<Test1>
+    rule2_users : Pool<Test2>
+}
+
+
 struct World {
-    objects : Vec<HashMap<String, Vec<u32>>>,
-    vacant : Vec<u32>,
-    components : Components
+    objects : Pool<Obj>
+    rules : TheWorldRules
 }
 
 impl World
@@ -47,34 +105,5 @@ impl World
     fn update(&self) {
 
     }
-
-    fn get<T : CompTrait>(&self, id : usize) -> Option<T> {
-        let map = &self.objects[id];
-        if let Some(ref m) = map.get(T::ID) {
-
-            /*
-            match T::ID {
-                "test" => Some(self.components.t[0] as T),
-                _ => None
-            }
-            */
-            None
-
-        }
-        else {
-            None
-        }
-    }
 }
 
-/*
-impl CompStore
-{
-    //fn get<T : CompTrait>(&self, index : u32) -> Option<T>
-    fn get<T>(&self, index : u32) -> Option<T>
-    {
-        None
-    }
-
-}
-*/
