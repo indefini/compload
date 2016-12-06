@@ -1,10 +1,15 @@
 #![feature(associated_consts)]
 
-#[macro_use]
-extern crate dormin;
 extern crate rustc_serialize;
 
+#[macro_use]
+extern crate dormin;
+extern crate pulse;
+
+
 use std::collections::HashMap;
+use std::default;
+
 use dormin::component::CompTrait;
 
 mod test;
@@ -43,7 +48,7 @@ pub struct Components
 }
 
 struct Obj {
-    id : uu
+    id : String
 }
 
 struct Pool<T>
@@ -56,10 +61,10 @@ struct Pool<T>
 
     //change size for each index : can get smaller
     cells : Vec<u32>,
-    free : u32,
+    free : usize,
 }
 
-impl<T:default> Pool<T>
+impl<T:default::Default> Pool<T>
 {
     fn new() -> Pool<T>
     {
@@ -72,14 +77,15 @@ impl<T:default> Pool<T>
 
     fn add_user(&mut self, id : u32 ) {
 
-        if free == 0 {
+        if self.free == 0 {
             self.data.push(T::default());
             self.cells.push(id);
         }
-        else if free > 0 {
+        else if self.free > 0 {
             //reset?
             //self.data[len-free].reset()
-            self.cells[self.cells.len()-free] = id;
+            let i = self.cells.len()-self.free;
+            self.cells[i] = id;
             self.free = self.free -1;
         }
     }
@@ -90,13 +96,13 @@ impl<T:default> Pool<T>
 //rules contains object
 struct TheWorldRules
 {
-    rule1_users : Pool<Test1>
-    rule2_users : Pool<Test2>
+    rule1_users : Pool<test::Test>,
+    rule2_users : Pool<test::Test>
 }
 
 
 struct World {
-    objects : Pool<Obj>
+    objects : Pool<Obj>,
     rules : TheWorldRules
 }
 

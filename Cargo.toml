@@ -12,6 +12,9 @@ crate-type = ["dylib"]
 [dependencies.dormin]
 git = "https://github.com/indefini/dormin.git"
 
+[dependencies.pulse]
+git = "https://github.com/indefini/pulse.git"
+
 [dependencies.rustc-serialize]
 git = "https://github.com/indefini/rustc-serialize.git"
 
