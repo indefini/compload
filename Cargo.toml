@@ -8,6 +8,7 @@ name = "compload"
 crate-type = ["dylib"]
 
 [dependencies]
+uuid = {version = "0.3.1", features = [ "v4", "rustc-serialize" ] }
 
 [dependencies.dormin]
 git = "https://github.com/indefini/dormin.git"

@@ -1,6 +1,7 @@
 #![feature(associated_consts)]
 
 extern crate rustc_serialize;
+extern crate uuid;
 
 #[macro_use]
 extern crate dormin;
@@ -32,6 +33,12 @@ pub fn get_my_i32() -> i32
 pub fn build_mesh()
 {
     println!("will try to build mesh");
+}
+
+#[no_mangle]
+pub fn build_mesh2(container : &mut pulse::ui::WidgetContainer, view_id : uuid::Uuid)
+{
+    println!("will try to build mesh 222222222");
 }
 
 
